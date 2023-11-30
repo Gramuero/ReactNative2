@@ -1,20 +1,36 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useEffect } from 'react';
+import { View, StyleSheet, Image } from 'react-native';
+import * as Animatable from 'react-native-animatable';
 
-export default function App() {
+const App = () => {
+  useEffect(() => {
+    // Анимация начинается после монтирования компонента
+    shipRef?.bounceInLeft(10000);
+  }, []);
+
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
+      <Animatable.Image
+        ref={(ref) => (shipRef = ref)}
+        source={require('./assets/ship.png')}
+        style={styles.ship}
+        animation="bounceInLeft"
+        duration={10000}
+      />
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
     justifyContent: 'center',
+    alignItems: 'center',
+  },
+  ship: {
+    width: 1000,
+    height: 1000,
   },
 });
+
+export default App;
